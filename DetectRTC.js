@@ -19,6 +19,12 @@
     var browserFakeUserAgent = 'Fake/5.0 (FakeOS) AppleWebKit/123 (KHTML, like Gecko) Fake/12.3.4567.89 Fake/123.45';
 
     var isNodejs = typeof process === 'object' && typeof process.versions === 'object' && process.versions.node;
+
+    // Do nothing during server-side rendering
+    if (process && process.browser && typeof window === 'undefined') {
+        return;
+    }
+
     if (isNodejs) {
         var version = process.versions.node.toString().replace('v', '');
         browserFakeUserAgent = 'Nodejs/' + version + ' (NodeOS) AppleWebKit/' + version + ' (KHTML, like Gecko) Nodejs/' + version + ' Nodejs/' + version
